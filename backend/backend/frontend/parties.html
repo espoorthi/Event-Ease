@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parties - EventEase</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="concert.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <a href="proj.html" class="home-button">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <h1>Parties</h1>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Upcoming Parties</h2>
+      <div class="concerts">
+        <div
+          class="concert-box"
+          onclick="selectParty('Ho Ho Ho.., Christmas party')"
+        >
+          <img
+            src="images/chrtmas.jpeg"
+            alt="Christmas Party"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>Ho Ho Ho.., Christmas party</h3>
+          <p><i class="far fa-calendar-alt"></i> December 25th, 2025</p>
+          <p><i class="far fa-clock"></i> 7:00 PM ONWARDS</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> DSL Virtue Mall, Hyderabad
+          </p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Now
+          </button>
+        </div>
+
+        <div
+          class="concert-box"
+          onclick="selectParty('Dress To Impress, Costume party')"
+        >
+          <img
+            src="images/costume.jpeg"
+            alt="Costume Party"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>Dress To Impress, Costume party</h3>
+          <p><i class="far fa-calendar-alt"></i> October 13th, 2025</p>
+          <p><i class="far fa-clock"></i> 8:00 PM ONWARDS</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Sattva Necklace Mall,
+            Hyderabad
+          </p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Now
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectParty('2026: The Reset')">
+          <img
+            src="images/reset.jpeg"
+            alt="New Year Party"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>2026: The Reset</h3>
+          <p><i class="far fa-calendar-alt"></i> December 31st, 2025</p>
+          <p><i class="far fa-clock"></i> 9:00 PM ONWARDS</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Durgam Cheruvu Bridge,
+            Hyderabad
+          </p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            Your premier destination for the most exciting parties and
+            celebrations.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="proj.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-calendar"></i> Events</a>
+            </li>
+            <li>
+              <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-phone"></i> +91 123-456-7890</li>
+            <li><i class="fas fa-envelope"></i> info@eventease.com</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const icon = themeToggle.querySelector("i");
+
+      const currentTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      updateIcon(currentTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateIcon(newTheme);
+      });
+
+      function updateIcon(theme) {
+        icon.className = theme === "light" ? "fas fa-moon" : "fas fa-sun";
+      }
+
+      function selectParty(partyName) {
+        localStorage.setItem("selectedEventType", "parties");
+        localStorage.setItem("selectedEventName", partyName);
+        window.location.href = "bookws.html";
+      }
+    </script>
+  </body>
+</html>

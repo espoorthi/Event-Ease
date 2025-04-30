@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>SPOTLIGHT</title>
+    <style>
+        .main {
+            background: url('https://c0.wallpaperflare.com/preview/285/1009/176/concery-wallpaper-festival-party.jpg') no-repeat center;
+            background-size: cover;
+            color: rgb(255, 255, 255);
+            padding: 100px 0;
+        }
+        .event-card {
+            margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        body {
+            background-color: #d0bbbb;
+            color: black;
+        }
+        .btn {
+            background-color: rgb(85, 11, 85);
+            box-shadow: none;
+        }
+        .navbar-brand {
+            color: red;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .footer a {
+            color: white;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            
+            SPOTLIGHT EVENTS
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="proj.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#events-section">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main text-center">
+        <h1>Book the best tickets at the best prices!</h1>
+    </div>
+
+    <div class="container mt-5" id="events-section">
+        <h2 class="text-center">Upcoming Events</h2>
+        <div class="row">
+            <div class="col-md-4 event-card">
+                <div class="card">
+                    <img src="https://img.freepik.com/premium-photo/band-playing-stage-with-band-playing-guitar_948935-2380.jpg" height="350" class="card-img-top" alt="Live concert event image">
+                    <div class="card-body">
+                        <h5 class="card-title">LIVE CONCERTS</h5>
+                        <a href="concert.html" class="btn btn-primary">EXPLORE</a>
+                    </div>
+                </div>
+            </div>
+           
+              
+            <div class="col-md-4 event-card">
+                <div class="card">
+                    <img src="https://cdn.yuup.co/image/7644/file/large-93db3deb5a3f0e7f528459477a435809.jpg" height="350" class="card-img-top" alt="Workshop event image">
+                    <div class="card-body">
+                        <h5 class="card-title">WORKSHOPS</h5>
+                        <a href="worksh.html" class="btn btn-primary">EXPLORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 event-card">
+                <div class="card">
+                    <img src="https://sunsetcinemaclub.in/img/admin/page/home/yvPVsqAWdR_rsz_cafe_cinema_2.jpg" height="350" class="card-img-top" alt="Event screening image">
+                    <div class="card-body">
+                        <h5 class="card-title">EVENTS</h5>
+                        <a href="screen.html" class="btn btn-primary">EXPLORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 event-card">
+                <div class="card">
+                    <img src="https://www.sportphotogallery.com/content/images/cmsfiles/product/33741/34479-list.jpg" height="350" class="card-img-top" alt="Sports event image">
+                    <div class="card-body">
+                        <h5 class="card-title">SPORTS</h5>
+                        <a href="sports.html" class="btn btn-primary">EXPLORE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+        <p>&copy; 2024 SPOTLIGHT EVENTS. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

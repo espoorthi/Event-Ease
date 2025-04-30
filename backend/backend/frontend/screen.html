@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events - EventEase</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="concert.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <a href="proj.html" class="home-button">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <h1>Events</h1>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Upcoming Events</h2>
+      <div class="concerts">
+        <div class="concert-box" onclick="selectEvent('YJHD Midnight Movie')">
+          <img
+            src="https://media.assettype.com/newindianexpress%2F2024-08%2F12110c70-aa44-4b0d-91de-f110f47d103a%2FCinematic.jpg"
+            alt="YJHD Midnight Movie"
+          />
+          <h3>YJHD: MIDNIGHT MOVIE SCREENING</h3>
+          <p><i class="far fa-calendar-alt"></i> 30TH DECEMBER</p>
+          <p><i class="far fa-clock"></i> 10:00 PM</p>
+          <p><i class="fas fa-map-marker-alt"></i> MINDSPACE, HI-TECH CITY</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Tickets
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectEvent('Christmas Party')">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPZx01bPD2u_aJfa-_9_CwAJmkQtCfj0JYUg&s"
+            alt="Christmas Party"
+          />
+          <h3>CHRISTMAS THEMED PARTY</h3>
+          <p><i class="far fa-calendar-alt"></i> 25TH DECEMBER</p>
+          <p><i class="far fa-clock"></i> 7:30 PM ONWARDS</p>
+          <p><i class="fas fa-map-marker-alt"></i> PRISM CLUB</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Tickets
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectEvent('Redbull Soapbox')">
+          <img
+            src="https://www.fridaywall.com/wp-content/uploads/2024/02/Red-Bull-Soapbox-Can-Cart-at-Charminar-Hyderabad-scaled.jpg"
+            alt="Redbull Soapbox"
+          />
+          <h3>REDBULL SOAPBOX RACE</h3>
+          <p><i class="far fa-calendar-alt"></i> 29TH DECEMBER</p>
+          <p><i class="far fa-clock"></i> 10:00 AM ONWARDS</p>
+          <p><i class="fas fa-map-marker-alt"></i> RAMANAIDU STUDIOS</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Tickets
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectEvent('Kanan Gill Comedy')">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzwxFFuMH5asjqztBX3nvNO82hkaz73hobQ&s"
+            alt="Kanan Gill Comedy"
+          />
+          <h3>KANAN GILL - STANDUP COMEDY</h3>
+          <p><i class="far fa-calendar-alt"></i> 29TH JANUARY</p>
+          <p><i class="far fa-clock"></i> 7:30 PM ONWARDS</p>
+          <p><i class="fas fa-map-marker-alt"></i> SHILPAKALA VEDIKA</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Tickets
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>Your premier destination for exciting events and entertainment.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="proj.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-calendar"></i> Events</a>
+            </li>
+            <li>
+              <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-phone"></i> +91 123-456-7890</li>
+            <li><i class="fas fa-envelope"></i> info@events.com</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const icon = themeToggle.querySelector("i");
+
+      const currentTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      updateIcon(currentTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateIcon(newTheme);
+      });
+
+      function updateIcon(theme) {
+        icon.className = theme === "light" ? "fas fa-moon" : "fas fa-sun";
+      }
+
+      function selectEvent(eventName) {
+        localStorage.setItem("selectedEvent", eventName);
+        window.location.href = "bookws.html";
+      }
+    </script>
+  </body>
+</html>

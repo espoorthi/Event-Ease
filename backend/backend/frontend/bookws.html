@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Events - EventEase</title>
+    <link rel="stylesheet" href="book.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #ff6b6b;
+        --secondary-color: #4ecdc4;
+        --text-color: #333;
+        --bg-color: #f8f9fa;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --header-bg: #333;
+        --footer-bg: #333;
+      }
+
+      [data-theme="dark"] {
+        --primary-color: #ff6b6b;
+        --secondary-color: #4ecdc4;
+        --text-color: #f0f0f0;
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --header-bg: #1a1a1a;
+        --footer-bg: #1a1a1a;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      header {
+        background-color: var(--header-bg);
+        color: #fff;
+        padding: 1rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .home-btn {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .home-btn:hover {
+        color: var(--primary-color);
+      }
+
+      .header-content h1 {
+        margin: 0;
+        font-family: "Source Serif 4", serif;
+        font-size: 1.8rem;
+        text-align: center;
+        flex-grow: 1;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        color: var(--primary-color);
+      }
+
+      .booking-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .booking-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .booking-header h1 {
+        color: var(--text-color);
+        font-family: "Source Serif 4", serif;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .booking-header p {
+        color: var(--text-color);
+        font-family: "Poppins", sans-serif;
+        transition: color 0.3s ease;
+      }
+
+      .booking-form {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-group label {
+        color: var(--text-color);
+        font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        transition: color 0.3s ease;
+      }
+
+      .form-group input {
+        padding: 0.8rem;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--card-bg);
+        color: var(--text-color);
+        font-family: "Poppins", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+      }
+
+      .total-amount {
+        background: var(--card-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+        border: 2px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .btn-book {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+        color: #fff;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-book:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-book:active {
+        transform: translateY(0);
+      }
+
+      .event-details {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border: 2px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .event-details h3 {
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        font-family: "Source Serif 4", serif;
+        transition: color 0.3s ease;
+      }
+
+      .event-details p {
+        color: var(--text-color);
+        margin: 0.5rem 0;
+        font-family: "Poppins", sans-serif;
+        transition: color 0.3s ease;
+      }
+
+      .event-details i {
+        color: var(--primary-color);
+        margin-right: 0.5rem;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: var(--footer-bg);
+        color: #fff;
+        padding: 3rem 0 1rem;
+        margin-top: 4rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        color: var(--primary-color);
+        font-family: "Source Serif 4", serif;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section p {
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+      }
+
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-family: "Poppins", sans-serif;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--primary-color);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-bottom p {
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        .booking-container {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+
+        .btn-book {
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="proj.html" class="home-btn">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <h1>Book Events</h1>
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i> Dark Mode
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="booking-container">
+        <div class="booking-header">
+          <h1>Book Your Event</h1>
+          <p>Fill in the details below to complete your booking</p>
+        </div>
+
+        <div class="event-details">
+          <h3>Selected Event</h3>
+          <div class="form-group">
+            <label for="eventTypeSelect">Event Type:</label>
+            <select id="eventTypeSelect" class="form-control">
+              <option value="">Select Event Type</option>
+              <option value="concert">Concerts</option>
+              <option value="workshop">Workshops</option>
+              <option value="parties">Parties</option>
+              <option value="cultural">Cultural Events</option>
+              <option value="meet_and_greet">Meet and Greet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="eventNameSelect">Event Name:</label>
+            <select id="eventNameSelect" class="form-control">
+              <!-- Options will be populated based on event type -->
+            </select>
+          </div>
+          <p>
+            <i class="fas fa-tag"></i> Price:
+            <span id="eventPrice">Loading...</span> per ticket
+          </p>
+        </div>
+
+        <form id="bookingForm" class="booking-form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tickets">Number of Tickets:</label>
+            <input
+              type="number"
+              id="tickets"
+              name="tickets"
+              min="1"
+              max="10"
+              required
+            />
+          </div>
+
+          <div class="total-amount">
+            Total Amount: <span id="totalAmount">₹0</span>
+          </div>
+
+          <button type="submit" class="btn-book">
+            <i class="fas fa-ticket-alt"></i> Proceed to Payment
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About EventEase</h3>
+            <p>
+              Your one-stop platform for event management and ticket booking.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="proj.html">Home</a></li>
+              <li><a href="concert.html">Concerts</a></li>
+              <li><a href="workshops.html">Workshops</a></li>
+              <li><a href="cultural.html">Cultural Events</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: info@eventease.com</p>
+            <p>Phone: +1 234 567 890</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 EventEase. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Check if user is logged in
+      const userToken = localStorage.getItem("userToken");
+      if (!userToken) {
+        window.location.href = "login.html";
+      }
+
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        body.setAttribute("data-theme", "dark");
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+      }
+
+      themeToggle.addEventListener("click", () => {
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+          themeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        } else {
+          body.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        }
+      });
+
+      // Define all events and their prices
+      const events = {
+        concert: {
+          "Band Jammers": { price: 500 },
+          "Band Aarohi": { price: 800 },
+          "Amit Trivedi": { price: 1000 },
+        },
+        workshop: {
+          "Pottery & Peace Workshop": { price: 300 },
+          "Bake 'em Workshop": { price: 400 },
+          "Let's Salsa! Workshop": { price: 500 },
+        },
+        parties: {
+          "Ho Ho Ho.., Christmas party": { price: 800 },
+          "Dress To Impress, Costume party": { price: 1000 },
+          "2026: The Reset": { price: 1200 },
+        },
+        cultural: {
+          "Dandiya Night": { price: 200 },
+          Deepotsav: { price: 150 },
+        },
+        meet_and_greet: {
+          "Prajakta Koli": { price: 600 },
+          "Chetan Bhagat": { price: 700 },
+          "Ravi Mantri": { price: 500 },
+        },
+      };
+
+      // Update the event type select options
+      document.getElementById("eventTypeSelect").innerHTML = `
+        <option value="">Select Event Type</option>
+        <option value="concert">Concerts</option>
+        <option value="workshop">Workshops</option>
+        <option value="parties">Parties</option>
+        <option value="cultural">Cultural Events</option>
+        <option value="meet_and_greet">Meet and Greet</option>
+      `;
+
+      // Get selected event from localStorage
+      const selectedEventType = localStorage.getItem("selectedEventType");
+      const selectedEventName = localStorage.getItem("selectedEventName");
+
+      // Update event details display
+      function updateEventDetails() {
+        const eventTypeSelect = document.getElementById("eventTypeSelect");
+        const eventNameSelect = document.getElementById("eventNameSelect");
+        const selectedType = eventTypeSelect.value;
+        const selectedName = eventNameSelect.value;
+
+        if (
+          selectedType &&
+          selectedName &&
+          events[selectedType] &&
+          events[selectedType][selectedName]
+        ) {
+          const eventData = events[selectedType][selectedName];
+          document.getElementById(
+            "eventPrice"
+          ).textContent = `₹${eventData.price}`;
+          calculateTotal();
+        } else {
+          document.getElementById("eventPrice").textContent = "Select an event";
+          document.getElementById("totalAmount").textContent = "₹0";
+        }
+      }
+
+      // Populate event names based on selected event type
+      document
+        .getElementById("eventTypeSelect")
+        .addEventListener("change", function () {
+          const eventType = this.value;
+          const eventNameSelect = document.getElementById("eventNameSelect");
+          eventNameSelect.innerHTML = '<option value="">Select Event</option>';
+
+          if (events[eventType]) {
+            Object.keys(events[eventType]).forEach((eventName) => {
+              const option = document.createElement("option");
+              option.value = eventName;
+              option.textContent = eventName;
+              eventNameSelect.appendChild(option);
+            });
+          }
+
+          updateEventDetails();
+        });
+
+      // Update event details when event name changes
+      document
+        .getElementById("eventNameSelect")
+        .addEventListener("change", updateEventDetails);
+
+      // Calculate total amount
+      function calculateTotal() {
+        const eventTypeSelect = document.getElementById("eventTypeSelect");
+        const eventNameSelect = document.getElementById("eventNameSelect");
+        const selectedType = eventTypeSelect.value;
+        const selectedName = eventNameSelect.value;
+        const ticketCount =
+          parseInt(document.getElementById("tickets").value) || 0;
+
+        let total = 0;
+        if (
+          selectedType &&
+          selectedName &&
+          events[selectedType] &&
+          events[selectedType][selectedName]
+        ) {
+          const basePrice = events[selectedType][selectedName].price;
+          total = basePrice * ticketCount;
+        }
+
+        document.getElementById("totalAmount").textContent = `₹${total}`;
+        return total;
+      }
+
+      // Add event listener for ticket count changes
+      document
+        .getElementById("tickets")
+        .addEventListener("change", calculateTotal);
+      document
+        .getElementById("tickets")
+        .addEventListener("input", calculateTotal);
+
+      // Initialize dropdowns on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const eventTypeSelect = document.getElementById("eventTypeSelect");
+        const eventNameSelect = document.getElementById("eventNameSelect");
+
+        // Set initial event type if available
+        if (selectedEventType && events[selectedEventType]) {
+          eventTypeSelect.value = selectedEventType;
+
+          // Populate event names for the selected type
+          Object.keys(events[selectedEventType]).forEach((eventName) => {
+            const option = document.createElement("option");
+            option.value = eventName;
+            option.textContent = eventName;
+            eventNameSelect.appendChild(option);
+          });
+
+          // Set initial event name if available
+          if (
+            selectedEventName &&
+            events[selectedEventType][selectedEventName]
+          ) {
+            eventNameSelect.value = selectedEventName;
+          }
+        }
+
+        updateEventDetails();
+      });
+
+      // Form submission
+      document
+        .getElementById("bookingForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const ticketCount = parseInt(
+            document.getElementById("tickets").value
+          );
+          const totalAmount = calculateTotal();
+
+          // Show payment confirmation popup
+          const confirmPayment = confirm(`Confirm Payment Details:\n
+Event Type: ${selectedEventType}
+Event: ${selectedEventName}
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Tickets: ${ticketCount}
+Total Amount: ₹${totalAmount}\n
+Do you want to proceed with the payment?`);
+
+          if (!confirmPayment) {
+            return; // User cancelled the payment
+          }
+
+          const formData = {
+            eventName: selectedEventName,
+            eventType: selectedEventType,
+            name,
+            email,
+            phone,
+            ticketCount,
+            totalAmount,
+            date: new Date().toISOString().split("T")[0],
+            time: "19:00",
+            venue: "Event Venue",
+            paymentDetails: {
+              // Add payment details as needed
+            },
+          };
+
+          try {
+            const response = await fetch("/api/booking/process", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+              },
+              body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Show success popup with booking details
+              const successMessage = `Booking Confirmed Successfully!\n\n
+Booking Details:
+Event Type: ${data.booking.eventType}
+Event: ${data.booking.eventName}
+Name: ${data.booking.name}
+Email: ${data.booking.email}
+Phone: ${data.booking.phone}
+Tickets: ${data.booking.ticketCount}
+Total Amount: ₹${data.booking.totalAmount}
+Payment ID: ${data.booking.paymentId}\n
+Thank you for booking with EventEase!`;
+
+              alert(successMessage);
+              // Store booking details or redirect to booking confirmation page
+              window.location.href = "proj.html";
+            } else {
+              alert(data.message || "Booking failed. Please try again.");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>

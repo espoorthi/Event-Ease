@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meet & Greet - EventEase</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="concert.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <a href="proj.html" class="home-button">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <h1>Meet & Greet</h1>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Upcoming Meet & Greet Events</h2>
+      <div class="concerts">
+        <div class="concert-box" onclick="selectEvent('Prajakta Koli')">
+          <img
+            src="images/prajbook.jpg"
+            alt="Prajakta Koli"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>PRAJAKTA KOLI</h3>
+          <p><i class="far fa-calendar-alt"></i> 5TH MAY, 2025</p>
+          <p><i class="far fa-clock"></i> 5:00 PM ONWARDS</p>
+          <p><i class="fas fa-map-marker-alt"></i> LUNA BOOKS, HYDERABAD</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Meet & Greet
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectEvent('Chetan Bhagat')">
+          <img
+            src="images/chetanbook.jpg"
+            alt="Chetan Bhagat"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>CHETAN BHAGAT</h3>
+          <p><i class="far fa-calendar-alt"></i> 20TH APRIL, 2025</p>
+          <p><i class="far fa-clock"></i> 4:00 PM ONWARDS</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> INORBIT MALL ATRIUM, HYDERABAD
+          </p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Meet & Greet
+          </button>
+        </div>
+
+        <div class="concert-box" onclick="selectEvent('Ravi Mantri')">
+          <img
+            src="images/ravibook.jpg"
+            alt="Ravi Mantri"
+            style="
+              width: 300px;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 10px;
+            "
+          />
+          <h3>RAVI MANTRI</h3>
+          <p><i class="far fa-calendar-alt"></i> 3RD MAY, 2025</p>
+          <p><i class="far fa-clock"></i> 6:00 PM ONWARDS</p>
+          <p><i class="fas fa-map-marker-alt"></i> OFF THE SHELF, HYDERABAD</p>
+          <button onclick="window.location.href='bookws.html'">
+            <i class="fas fa-ticket-alt"></i> Book Meet & Greet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            Your premier destination for exclusive meet & greet events with your
+            favorite personalities.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="proj.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-calendar"></i> Events</a>
+            </li>
+            <li>
+              <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-phone"></i> +91 123-456-7890</li>
+            <li><i class="fas fa-envelope"></i> info@meetandgreet.com</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const icon = themeToggle.querySelector("i");
+
+      const currentTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      updateIcon(currentTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateIcon(newTheme);
+      });
+
+      function updateIcon(theme) {
+        icon.className = theme === "light" ? "fas fa-moon" : "fas fa-sun";
+      }
+
+      function selectEvent(eventName) {
+        localStorage.setItem("selectedEvent", eventName);
+        window.location.href = "bookws.html";
+      }
+    </script>
+  </body>
+</html>

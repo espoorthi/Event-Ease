@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #d0bbbb;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: rgb(0, 0, 0);
+        text-align: center;
+      }
+      fieldset {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: white;
+      }
+      legend {
+        font-weight: bold;
+        font-size: 18px;
+        color: rgb(61, 16, 40);
+        margin-bottom: 10px;
+      }
+      label {
+        color: rgb(0, 0, 0);
+        display: block;
+        margin-top: 10px;
+      }
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      input[type="submit"],
+      #book-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: rgb(82, 22, 52);
+        color: aliceblue;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover,
+      #book-button:hover {
+        background-color: rgb(61, 16, 40);
+      }
+      .payment-method {
+        margin-top: 20px;
+      }
+      .card-details,
+      .upi-details {
+        display: none;
+      }
+      .event-selection {
+        margin-bottom: 20px;
+      }
+      .event-selection label {
+        color: rgb(0, 0, 0);
+        display: block;
+        margin-bottom: 5px;
+      }
+      .event-selection select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+      }
+    </style>
+    <script>
+      function updateEventDetails() {
+        const eventSelect = document.getElementById("event-select");
+        const selectedEvent = eventSelect.value;
+
+        let eventName, eventType;
+
+        switch (selectedEvent) {
+          case "concert":
+            eventName = "Summer Concert";
+            eventType = "Concert";
+            break;
+          case "workshop":
+            eventName = "Tech Workshop";
+            eventType = "Workshop";
+            break;
+          case "party":
+            eventName = "New Year Party";
+            eventType = "Party";
+            break;
+          case "cultural":
+            eventName = "Cultural Festival";
+            eventType = "Cultural";
+            break;
+          case "meet":
+            eventName = "Celebrity Meet";
+            eventType = "Meet & Greet";
+            break;
+          default:
+            eventName = "";
+            eventType = "";
+        }
+
+        document.getElementById("eventName").value = eventName;
+        document.getElementById("eventType").value = eventType;
+      }
+
+      function showPaymentDetails() {
+        const paymentMethod = document.getElementById("payment-method").value;
+        document.querySelector(".card-details").style.display =
+          paymentMethod === "credit-card" ? "block" : "none";
+        document.querySelector(".upi-details").style.display =
+          paymentMethod === "upi" ? "block" : "none";
+      }
+
+      async function handlePayment(event) {
+        event.preventDefault();
+
+        const paymentMethod = document.getElementById("payment-method").value;
+        const email = document.querySelector(`#${paymentMethod}-email`).value;
+        const eventName = document.getElementById("eventName").value;
+        const eventType = document.getElementById("eventType").value;
+
+        // Card details (if applicable)
+        const cardDetails =
+          paymentMethod === "credit-card"
+            ? {
+                cardNumber: document.getElementById("card-number").value,
+                cardHolder: document.getElementById("card-holder").value,
+                expiryDate: document.getElementById("expiry-date").value,
+                cvv: document.getElementById("cvv").value,
+              }
+            : null;
+
+        // UPI details (if applicable)
+        const upiDetails =
+          paymentMethod === "upi"
+            ? {
+                upiApp: document.getElementById("upi-app").value,
+                upiId: document.getElementById("upi-id").value,
+              }
+            : null;
+
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/booking/book",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                paymentMethod,
+                email,
+                cardDetails,
+                upiDetails,
+                eventName,
+                eventType,
+                ticketCount: 1,
+                totalAmount: 100,
+                date: new Date().toISOString().split("T")[0],
+                time: "19:00",
+                venue: "Event Venue",
+              }),
+            }
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          if (data.success) {
+            //alert("Payment Successful! Your booking is complete.");
+            window.location.href = "paysuccess.html";
+          } else {
+            alert("Error: " + data.message);
+          }
+        } catch (error) {
+          console.error("Error during payment processing:", error);
+          alert("An error occurred. Please try again.");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>PAY NOW</h1>
+    <fieldset>
+      <b>Select Payment Method</b>
+      <form id="payment-form" onsubmit="handlePayment(event)">
+        <input type="hidden" id="eventName" name="eventName" />
+        <input type="hidden" id="eventType" name="eventType" />
+
+        <div class="event-selection">
+          <label for="event-select">Select Event:</label>
+          <select
+            id="event-select"
+            name="event-select"
+            required
+            onchange="updateEventDetails()"
+          >
+            <option value="">--Select Event--</option>
+            <option value="concert">Summer Concert</option>
+            <option value="workshop">Tech Workshop</option>
+            <option value="party">New Year Party</option>
+            <option value="cultural">Cultural Festival</option>
+            <option value="meet">Celebrity Meet</option>
+          </select>
+        </div>
+
+        <div class="payment-method">
+          <label for="payment-method">Choose Payment Method:</label>
+          <select
+            id="payment-method"
+            name="payment-method"
+            onchange="showPaymentDetails()"
+            required
+          >
+            <option value="">--Select Method--</option>
+            <option value="credit-card">Credit/Debit Card</option>
+            <option value="upi">UPI</option>
+          </select>
+        </div>
+
+        <div class="card-details">
+          <legend>Enter Card Details</legend>
+          <label for="card-number">Card Number:</label>
+          <input
+            type="text"
+            id="card-number"
+            name="card-number"
+            placeholder="1223 2232 1231 1232"
+            pattern="\d{4} \d{4} \d{4} \d{4}"
+            title="Enter a valid 16-digit card number"
+          />
+
+          <label for="card-holder">Card Holder Name:</label>
+          <input
+            type="text"
+            id="card-holder"
+            name="card-holder"
+            placeholder="Enter Card Holder Name"
+          />
+
+          <label for="expiry-date">Expiry Date (MM/YY):</label>
+          <input
+            type="text"
+            id="expiry-date"
+            name="expiry-date"
+            placeholder="MM/YY"
+            pattern="\d{2}/\d{2}"
+            title="Enter in MM/YY format"
+          />
+
+          <label for="cvv">CVV:</label>
+          <input
+            type="text"
+            id="cvv"
+            name="cvv"
+            placeholder="123"
+            pattern="\d{3}"
+            title="Enter a valid 3-digit CVV"
+          />
+
+          <label for="card-email">Email ID:</label>
+          <input
+            type="email"
+            id="credit-card-email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+        </div>
+
+        <div class="upi-details">
+          <legend>Enter UPI Details</legend>
+          <label for="upi-app">Choose UPI App:</label>
+          <select id="upi-app" name="upi-app">
+            <option value="">--Select UPI App--</option>
+            <option value="phonepe">PhonePe</option>
+            <option value="gpay">Google Pay</option>
+            <option value="paytm">Paytm</option>
+            <option value="bhim">BHIM</option>
+          </select>
+
+          <label for="upi-id">UPI ID:</label>
+          <input
+            type="text"
+            id="upi-id"
+            name="upi-id"
+            placeholder="example@upi"
+            pattern="[a-zA-Z0-9.\-_]{2,}@[a-zA-Z]{2,}"
+            title="Enter a valid UPI ID"
+          />
+
+          <label for="upi-email">Email ID:</label>
+          <input
+            type="email"
+            id="upi-email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+        </div>
+
+        <button type="submit" id="book-button">PAY NOW</button>
+      </form>
+    </fieldset>
+  </body>
+</html>
