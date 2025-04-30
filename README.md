@@ -2,7 +2,7 @@
 
 ## Description
 
-EventEase is a web application designed for booking and managing events. It features a backend built with Node.js and Express, utilizing MongoDB for data storage.
+EventEase is a full-stack web application aimed at simplifying the process of discovering, booking, and managing events. Users can browse available events, register/login securely, and book their spots. The application likely features integration with a payment gateway, generates QR codes for ticket confirmation, and sends email notifications. The backend is built using Node.js and Express, providing a RESTful API that interacts with a MongoDB database for persistent storage.
 
 ## Features (Inferred)
 
@@ -35,7 +35,7 @@ EventEase is a web application designed for booking and managing events. It feat
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/sriharsha0x1/Event-Ease
     cd EventEase
     ```
 2.  **Install Root Dependencies (if any frontend/utility scripts are here):**
@@ -76,10 +76,4 @@ EventEase is a web application designed for booking and managing events. It feat
 2.  **Access the Frontend:**
     *   Open the main HTML file (likely `projgptcopy.html` or similar, possibly served by the backend) in your web browser. (Instructions might need adjustment based on how the frontend is served).
 
-## Contributing
 
-[Optional: Add guidelines for contributing to the project.]
-
-## License
-
-[Optional: Specify the project license, e.g., MIT License.]
