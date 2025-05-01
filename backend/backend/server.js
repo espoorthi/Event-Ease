@@ -17,9 +17,7 @@ app.use(bodyParser.json());
 
 // MongoDB connection
 mongoose
-  .connect(
-    "mongodb+srv://sriharshabhoomandla:KT0GXbrxavWlYFIo@cluster0.qjziw.mongodb.net/EventEase"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 mongoose.connection.on("disconnected", () => {
