@@ -2,14 +2,13 @@
 
 ## Description
 
-EventEase is a full-stack web application aimed at simplifying the process of discovering, booking, and managing events. Users can browse available events, register/login securely, and book their spots. The application likely features integration with a payment gateway, generates QR codes for ticket confirmation, and sends email notifications. The backend is built using Node.js and Express, providing a RESTful API that interacts with a MongoDB database for persistent storage.
+EventEase is a full-stack web application aimed at simplifying the process of discovering, booking, and managing events. Users can browse available events, register/login securely, and book their spots. The application likely features integration with a payment gateway,  and sends email notifications. The backend is built using Node.js and Express, providing a RESTful API that interacts with a MongoDB database for persistent storage.
 
 ## Features (Inferred)
 
 *   User Authentication (Login/Signup)
 *   Event Browsing and Booking
 *   Payment Processing (Integration likely via `/api/booking`)
-*   QR Code Generation (Potentially for tickets/confirmation)
 *   Email Notifications (Potentially for booking confirmation)
 
 ## Technologies Used
@@ -26,10 +25,9 @@ EventEase is a full-stack web application aimed at simplifying the process of di
     *   HTML
     *   CSS
     *   JavaScript
-    *   (Potentially others based on `projgptcopy.html` content)
+    *   (Potentially others based on `proj.html` content)
 *   **Other:**
     *   Nodemailer (for sending emails)
-    *   qrcode (for generating QR codes)
 
 ## Setup and Installation
 
