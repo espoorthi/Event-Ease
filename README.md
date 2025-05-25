@@ -52,7 +52,6 @@ EventEase is a web application designed for booking and managing events. It feat
   - HTML
   - CSS
   - JavaScript
-  - (Potentially others based on `projgptcopy.html` content)
 - **Other:**
   - Nodemailer (for sending emails)
 
