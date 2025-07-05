@@ -132,5 +132,3 @@ EventEase is a web application designed for booking and managing events. It feat
 
     * The server should start, typically on `http://localhost:5000` (or the port specified in your `.env` file).
 
-3.  **Access the Frontend:**
-    - Open the main HTML file (likely `projgptcopy.html` or similar, possibly served by the backend) in your web browser. (Instructions might need adjustment based on how the frontend is served).
