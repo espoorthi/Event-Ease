@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EventEase
 
 ## Description
@@ -132,3 +133,6 @@ EventEase is a web application designed for booking and managing events. It feat
 
     * The server should start, typically on `http://localhost:5000` (or the port specified in your `.env` file).
 
+=======
+# Event-Ease
+>>>>>>> a89f66620de5db85fd9807e2ae8056b693397704
